@@ -1,0 +1,24 @@
+button{
+    border: none;
+    background-color: black;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.red-button{
+    background-color: red;
+}
+
+.blue-button{
+    background-color: blue;
+}
+
+.green-button{
+    background-color: green;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
