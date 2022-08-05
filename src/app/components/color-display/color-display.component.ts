@@ -2,7 +2,6 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectColorComboHex, selectColorComboRgb } from 'src/app/redux/colors.selectors';
 import { AppState, ColorsState } from 'src/app/redux-types';
 
 @Component({
@@ -27,7 +26,7 @@ get style() {
 constructor(
     private store: Store<AppState>
     ) {
-      this.colorCombo$ = store.select(selectColorComboHex);
+      this.colorCombo$ = store.select(() => '#000000');
      }
 
   ngOnInit(): void {

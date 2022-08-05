@@ -1,5 +1,5 @@
 <app-color-display></app-color-display>
-<app-red></app-red>
-<app-green></app-green>
-<app-blue></app-blue>
+<app-color-slider
+*ngFor="let color of colors"
+[color]="color"></app-color-slider>
 <app-reset></app-reset>

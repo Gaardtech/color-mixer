@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatSliderModule } from '@angular/material/slider'
 import { FormsModule } from '@angular/forms'; 
 import { AppComponent } from './app.component';
-import { RedComponent } from './components/red/red.component';
-import { GreenComponent } from './components/green/green.component';
-import { BlueComponent } from './components/blue/blue.component';
 import { ResetComponent } from './components/reset/reset.component';
 import { StoreModule } from '@ngrx/store';
 import { colorsReducer } from './redux/colors.reducer';
@@ -16,12 +13,9 @@ import { ColorSliderComponent } from './components/color-slider/color-slider.com
 @NgModule({
   declarations: [
     AppComponent,
-    RedComponent,
-    GreenComponent,
-    BlueComponent,
     ResetComponent,
     ColorDisplayComponent,
-    ColorSliderComponent
+    ColorSliderComponent,
   ],
   imports: [
     BrowserModule,

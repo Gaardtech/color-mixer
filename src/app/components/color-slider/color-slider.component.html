@@ -1,9 +1,8 @@
-<div >
-    <p>Blue: {{ currentValue }}</p>
-    <mat-slider class="slider"
-        (input) = "currentValue = $event.value"
-        [value] = "currentValue"
-        [min] = "0"
-        [max] = "255"
-        ></mat-slider>
+<div>
+    <p>{{color}}: {{ currentValue }}</p>
+    <mat-slider
+    (input)="currentValue = $event.value"
+    [value]="currentValue"
+    [min]="1"
+    [max]="10"></mat-slider>
 </div>
