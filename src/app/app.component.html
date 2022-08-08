@@ -2,4 +2,6 @@
 <app-color-slider
 *ngFor="let color of colors"
 [color]="color"></app-color-slider>
+<input [(ngModel)] = "colorInputValue" placeholder="Add a new color"/>
+<button (click)="addColor()">Add Color</button>
 <app-reset></app-reset>

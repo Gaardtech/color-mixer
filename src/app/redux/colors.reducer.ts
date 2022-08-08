@@ -5,11 +5,14 @@ import {
     greenUpdated,
     blueUpdated,
     resetClicked,
-    colorUpdated
+    colorUpdated,
+    colorAdded,
+    colorDeleted
 } from './colors.actions';
 import { ColorsState, ColorsAction } from '../redux-types';
+import { retry } from 'rxjs';
 
-const initialState: ColorsState = [{ hex: '#bada55' , value: 1}];
+const initialState: ColorsState = [];
 
 
 export const colorsReducer: ActionReducer<ColorsState,ColorsAction> = createReducer(
@@ -18,8 +21,11 @@ export const colorsReducer: ActionReducer<ColorsState,ColorsAction> = createRedu
         return state.map(color => color.hex === hex ? {hex,value} : color);
     } ),
     on(resetClicked, () => initialState),
-    on(redUpdated, (state, {value}) => ({ ...state, red: value ,})),
-    on(greenUpdated, (state, {value}) => ({ ...state, green: value,})),
-    on(blueUpdated, (state, {value}) => ({ ...state, blue: value,})),
+    on(colorAdded, (state, {hex}) => {
+        return state.concat({hex, value: 1})
+    } ),
+    on(colorDeleted, (state, {hex}) => {
+        return state.filter(color => color.hex != hex);
+    })
     
 ) 
