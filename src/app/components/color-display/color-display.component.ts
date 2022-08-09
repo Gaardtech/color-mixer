@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState, ColorsState } from 'src/app/redux-types';
+import { selectColorComboHex } from 'src/app/redux/colors.selectors';
 
 @Component({
   selector: 'app-color-display',
@@ -26,7 +27,7 @@ get style() {
 constructor(
     private store: Store<AppState>
     ) {
-      this.colorCombo$ = store.select(() => '#000000');
+      this.colorCombo$ = store.select(selectColorComboHex);
      }
 
   ngOnInit(): void {
