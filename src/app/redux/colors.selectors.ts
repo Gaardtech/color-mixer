@@ -1,16 +1,6 @@
-import { createSelector } from "@ngrx/store";
+import { createSelector, State } from "@ngrx/store";
+import { map } from "rxjs";
 import { AppState } from "../redux-types";
-
-// export const selectRed = (state: AppState) => state.colors.red;
-// export const selectGreen = (state: AppState) => state.colors.green;
-// export const selectBlue = (state: AppState) => state.colors.blue;
-
-// export const selectColorComboRgb =createSelector(
-//     selectRed,
-//     selectGreen,
-//     selectBlue,
-//     (red,green,blue) => `rgb(${red},${green},${blue})`,
-// );
 
 const twoDigits = (str: string) => {
     return ('00' + str).slice(-2);
@@ -20,9 +10,43 @@ const rgbToHex = (r: number, g: number, b: number): string => {
     return `#${twoDigits(r.toString(16))}${twoDigits(g.toString(16))}${twoDigits(b.toString(16))}`
 };
 
-// export const selectColorComboHex =createSelector( 
-//     selectRed,
-//     selectGreen,
-//     selectBlue,
-//     (red,green,blue) => rgbToHex(red,green,blue),
-// );
+const hexToRgb = (hex: string) => {
+    const [rhex, ghex, bhex] = hex.substring(1).match(/.{2}/g) as string[];
+    return{
+        r: parseInt(rhex,16),
+        g: parseInt(ghex,16),
+        b: parseInt(bhex,16),
+    };
+};
+
+export const selectColorComboHex = (state: AppState) => {
+    const colors = state.colors;
+
+    if (colors.length === 0){
+        return '#000000';
+    }
+
+    const totalStrengthValue = colors
+    .map(color => color.value)
+    .reduce((sum,x) => sum + x);
+
+    const rgbColors = colors.map(color => ({
+        ...hexToRgb(color.hex),
+        value: color.value
+    }));
+
+    const  rgbTotal = rgbColors.reduce((rgbSum,color) => ({
+        r: rgbSum.r + color.r * color.value,
+        g: rgbSum.g + color.g * color.value,
+        b: rgbSum.b + color.b * color.value,
+    }),{r: 0, g: 0 , b: 0});
+
+    const rgbAverage = {
+        r: rgbTotal.r / totalStrengthValue,
+        g: rgbTotal.g / totalStrengthValue,
+        b: rgbTotal.b / totalStrengthValue,
+    }
+
+    return rgbToHex(rgbAverage.r,rgbAverage.g,rgbAverage.b);
+
+};
