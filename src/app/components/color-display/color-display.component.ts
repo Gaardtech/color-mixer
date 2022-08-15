@@ -28,6 +28,7 @@ constructor(
     private store: Store<AppState>
     ) {
       this.colorCombo$ = store.select(selectColorComboHex);
+      
      }
 
   ngOnInit(): void {

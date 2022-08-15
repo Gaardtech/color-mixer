@@ -32,19 +32,19 @@ export const selectColorComboHex = (state: AppState) => {
 
     const rgbColors = colors.map(color => ({
         ...hexToRgb(color.hex),
-        value: color.value
+        value: color.value,
     }));
 
     const  rgbTotal = rgbColors.reduce((rgbSum,color) => ({
         r: rgbSum.r + color.r * color.value,
         g: rgbSum.g + color.g * color.value,
         b: rgbSum.b + color.b * color.value,
-    }),{r: 0, g: 0 , b: 0});
+    }),{r: 0, g: 0, b: 0});
 
     const rgbAverage = {
-        r: rgbTotal.r / totalStrengthValue,
-        g: rgbTotal.g / totalStrengthValue,
-        b: rgbTotal.b / totalStrengthValue,
+        r: Math.floor(rgbTotal.r / totalStrengthValue),
+        g: Math.floor(rgbTotal.g / totalStrengthValue),
+        b: Math.floor(rgbTotal.b / totalStrengthValue),
     }
 
     return rgbToHex(rgbAverage.r,rgbAverage.g,rgbAverage.b);
